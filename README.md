@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ```sh
 git clone https://github.com/tege3000/nameTag.git
-cd xno
+cd nameTag
 npm install
 npm start
 ```
