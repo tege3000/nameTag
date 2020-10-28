@@ -41,13 +41,8 @@ class NameTag extends React.Component {
                 {this.state.timeLeft > 0 ? (
                     <div className="text-center">
                         <h1>{this.props.name}</h1>
-                        <small>
-                            Expires in {this.state.expiresAt.format('MMM Do, h:mm:ss a')} {' '}
-                        </small> <br/>
-                        <small>
-                            Current time is {this.state.currentTime.format('MMM Do, h:mm:ss a')} {' '}
-                        </small> {' '} 
-                        <br/>
+                        <small>Expires in {this.state.expiresAt.format('MMM Do, h:mm:ss a')} </small> <br/>
+                        <small>Current time is {this.state.currentTime.format('MMM Do, h:mm:ss a')}</small><br/>
                     </div>
                 ) : (
                     <div className="text-center">Expired</div>
