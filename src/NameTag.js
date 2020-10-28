@@ -4,47 +4,38 @@ import moment from 'moment';
 
 const NameTag = ({duration, name}) => {
 
-    const [expiresAt, setExpiresAt] = useState(moment().add(duration, "minutes"))
-    const [currentTime, setCurrenTime] = useState(moment())
-    const [validFor, setValidFor] = useState(duration)
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         expiresAt: moment().add(props.duration, "minutes"),
-    //         currentTime: moment(),
-    //         timeLeft: props.duration,
-    //     }
-    // }
+    const [expiresAt, ] = useState(moment().add(duration, "minutes"))
+    const [currentTime, setCurrenTime] = useState(new Date())
+    const [timeLeft, setTimeLeft] = useState(duration)
 
-    // componentDidMount() {
-    //     // every minute we want to count down
-    //     // when time left reaches 0 we want to stop showing the name Tag
-    //     this.minId = setInterval(() => {
-    //         this.setState({
-    //             timeLeft: this.state.timeLeft - 1,
-    //         });
-    //     }, 60000);
+    useEffect(() => {
+        const secId = setInterval(() => {
+            setCurrenTime(new Date())
+        }, 1000);
 
-    //     // update currentTime every second (1000ms == 1s)
-    //     this.secId = setInterval(() => {
-    //         this.setState({
-    //             currentTime: this.state.currentTime.add(1, 'seconds'),
-    //         }); 
-    //     }, 1000);
-    // }
+        return () => clearInterval(secId)
+    }, [])
 
-    // componentWillUnmount() {
-    //     clearInterval(this.minId)
-    //     clearInterval(this.secId)
-    // }
+    useEffect(() => {
+        let countdown = timeLeft;
+        const minId = setInterval(() => {
+            countdown--;
+            setTimeLeft(countdown);
+        }, 60000);
+
+        return () => clearInterval(minId)
+    }, [])
+    
+
+    const formatDate = date => moment(date).format('MMM Do, h:mm:ss a');
 
     return (
         <div className="card mx-auto p-4" style={{width: '400px'}}>
-            {validFor > 0 ? (
+            {timeLeft > 0 ? (
                 <div className="text-center">
                     <h1>{name}</h1>
-                    <small>Expires in {expiresAt.format('MMM Do, h:mm:ss a')} </small> <br/>
-                    <small>Current time is {currentTime.format('MMM Do, h:mm:ss a')}</small><br/>
+                    <small>Expires in {formatDate(expiresAt)} </small> <br/>
+                    <small>Current time is {formatDate(currentTime)}</small><br/>
                 </div>
             ) : (
                 <div className="text-center">Expired</div>
