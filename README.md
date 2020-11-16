@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## React Concepts Learned:
 * States and Lifecycle
-* Hooks
+* Hooks (Use States, Use Effects)
 
 ## Quick Start
 
